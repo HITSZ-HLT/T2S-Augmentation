@@ -42,7 +42,7 @@ fi
 
 if [ ! "${dataset}" ]
 then
-    dataset="data/origin/14res"
+    dataset="origin/14res"
 fi
 
 
