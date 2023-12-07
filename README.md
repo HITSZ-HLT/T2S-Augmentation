@@ -83,7 +83,7 @@ bash/ppo_tuning.sh -c 0 -b 14res -d data/origin_syn/14res -t ./output/extraction
 bash/data_synthesis.sh -c 0 -b 14res_100k -g ./output/generation_ppo/model/b=ppo -e ./output/extraction/model/model/dataset=origin/14res,b=extractor,seed=42 -a ./output/alignment_model/model/b=alignment_model -f ./output/fluency_model/model/b=fluency_model -n 100000 -d data/origin_syn/14res -r output/extraction/pseudo_labeled/yelp2023.json
 python data_filtering.py --origin_data_dir data/origin/14res --augmented_data_dir ./output/augmentation/14res_100k_42.json --output_dir ./output/augmentation_filtered/14res_5k_42 --k 5000
 ```
-注：请事先解压data/unlabeled下的文件。
+注：请事先解压`data/unlabeled`下的文件。
 
 增强好的数据集在`data/augmented`目录下。
 
