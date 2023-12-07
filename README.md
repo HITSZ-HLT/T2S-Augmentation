@@ -52,4 +52,38 @@
 
 <div align="center"> <img src="https://github.com/HITSZ-HLT/T2S-Augmentation/assets/9134454/de73b43f-c18e-4254-bd08-711022bf89e0" alt="main result" width="70%" /></div>
 
+# 运行代码
+
+**环境配置**
+
+- transformers==4.26.1
+- torch==1.10.1
+- pytorch-lightning==1.9.3
+- rouge==1.0.1
+- nltk==3.8.1
+- sacrebleu==2.3.1
+- spacy==3.5.0
+
+**运行代码**
+
+运行起来比较复杂，下面是14res上的一个参考。
+
+```
+chmod +x bash/*
+bash/train_extractor.sh -c 0 -b extractor -d origin/14res
+bash/do_extraction.sh -c 0 -m ./output/extraction/model/model/dataset=origin/14res,b=extractor,seed=42 -d data/unlabel/yelp2023/100k_1.json -o ./output/extraction/pseudo_labeled/yelp2023.json
+python parsing.py --data_dir ./data/origin --dataset 14res --output_dir ./data/origin_syn
+python parsing.py --data_dir ./output/extraction/pseudo_labeled --dataset yelp2023.json --output_dir ./output/extraction/pseudo_labeled_syn --main2
+bash/train_generator.sh -c 0 -d ./data/origin_syn/14res -t ./output/extraction/pseudo_labeled/yelp2023.json -b generator
+bash/build_fluency_dataset.sh -c 0 -d ./data/origin_syn/14res -t ./output/extraction/pseudo_labeled_syn/yelp2023.json -m ./output/generation/model/b=generator -o ./output/fluency_dataset_14res/
+bash/build_alignment_dataset.sh -c 0 -d ./data/origin_syn/14res -t ./output/extraction/pseudo_labeled_syn/yelp2023.json -m ./output/extraction/model/model/dataset=origin/14res,b=extractor,seed=42 -o ./output/alignment_dataset_14res/
+bash/train_fluency_discriminator.sh -c 0 -d ./output/fluency_dataset_14res/ -b fluency_model
+bash/train_alignment_discriminator.sh -c 0 -d ./output/fluency_dataset_14res/ -b alignment_model
+bash/ppo_tuning.sh -c 0 -b 14res -d data/origin_syn/14res -t ./output/extraction/pseudo_labeled_syn/yelp2023.json -g ./output/generation/model/b=generator -a ./output/alignment_model/model/b=alignment_model -f ./output/fluency_model/model/b=fluency_model -b ppo
+bash/data_synthesis.sh -c 0 -b 14res_100k -g ./output/generation_ppo/model/b=ppo -e ./output/extraction/model/model/dataset=origin/14res,b=extractor,seed=42 -a ./output/alignment_model/model/b=alignment_model -f ./output/fluency_model/model/b=fluency_model -n 100000 -d data/origin_syn/14res -r output/extraction/pseudo_labeled/yelp2023.json
+python data_filtering.py --origin_data_dir data/origin/14res --augmented_data_dir ./output/augmentation/14res_100k_42.json --output_dir ./output/augmentation_filtered/14res_5k_42 --k 5000
+```
+注：请事先解压data/unlabeled下的文件。
+
+  
 
