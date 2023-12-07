@@ -109,6 +109,6 @@ if __name__ == '__main__':
 
 
 """
-python parsing.py --data_dir "./data/origin" --dataset 14res --output_dir "./data/orgin_syn"
+python parsing.py --data_dir "./data/origin" --dataset 14res --output_dir "./data/origin_syn"
 python parsing.py --data_dir "./output/extraction/pseudo_labeled" --dataset yelp2023.json --output_dir "./output/extraction/pseudo_labeled_syn" --main2
 """
