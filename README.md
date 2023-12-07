@@ -85,7 +85,9 @@ python data_filtering.py --origin_data_dir data/origin/14res --augmented_data_di
 ```
 注：请事先解压`data/unlabeled`下的文件。
 
-增强好的数据集在`data/augmented`目录下。
+**生成的数据集**
+
+我们将我们的方法在14res和14lap上应用，增强后的数据集可在`data/augmented`目录下获取。
 
   
 
