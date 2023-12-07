@@ -85,5 +85,7 @@ python data_filtering.py --origin_data_dir data/origin/14res --augmented_data_di
 ```
 注：请事先解压data/unlabeled下的文件。
 
+增强好的数据集在`data/augmented`目录下。
+
   
 
