@@ -1,6 +1,6 @@
 # T2S-Augmentation
 本仓库开源了以下论文的代码：
-- 标题：Target-to-Source Augmentation for Aspect Sentiment Triplet Extraction
+- 标题：[Target-to-Source Augmentation for Aspect Sentiment Triplet Extraction](https://aclanthology.org/2023.emnlp-main.747/)
 - 作者：Yice Zhang, Yifan Yang, Meng Li, Bin Liang, Shiwei Chen, Ruifeng Xu
 - 会议：EMNLP-2023 Main (Long)
 
