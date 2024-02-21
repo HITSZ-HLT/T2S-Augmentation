@@ -74,7 +74,7 @@ bash/train_extractor.sh -c 0 -b extractor -d origin/14res
 bash/do_extraction.sh -c 0 -m ./output/extraction/model/dataset=origin/14res,b=extractor,seed=42/ -d ./data/unlabeled/yelp2023/100k_1.json -o ./output/extraction/pseudo_labeled/yelp2023.json
 python parsing.py --data_dir ./data/origin --dataset 14res --output_dir ./data/origin_syn
 python parsing.py --data_dir ./output/extraction/pseudo_labeled --dataset yelp2023.json --output_dir ./output/extraction/pseudo_labeled_syn --main2
-bash/train_generator.sh -c 0 -d ./data/origin_syn/14res -t ./output/extraction/pseudo_labeled/yelp2023.json -b generator
+bash/train_generator.sh -c 0 -d ./data/origin_syn/14res -t ./output/extraction/pseudo_labeled_syn/yelp2023.json -b generator
 bash/build_fluency_dataset.sh -c 0 -d ./data/origin_syn/14res -t ./output/extraction/pseudo_labeled_syn/yelp2023.json -m ./output/generation/model/b=generator -o ./output/fluency_dataset_14res/
 bash/build_alignment_dataset.sh -c 0 -d ./data/origin_syn/14res -t ./output/extraction/pseudo_labeled_syn/yelp2023.json -m ./output/extraction/model/model/dataset=origin/14res,b=extractor,seed=42 -o ./output/alignment_dataset_14res/
 bash/train_fluency_discriminator.sh -c 0 -d ./output/fluency_dataset_14res/ -b fluency_model
