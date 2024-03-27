@@ -80,8 +80,8 @@ bash/build_alignment_dataset.sh -c 0 -d ./data/origin_syn/14res -t ./output/extr
 bash/train_fluency_discriminator.sh -c 0 -d ./output/fluency_dataset_14res/ -b fluency_model
 bash/train_alignment_discriminator.sh -c 0 -d ./output/alignment_dataset_14res/ -b alignment_model
 bash/ppo_tuning.sh -c 0 -b 14res -d data/origin_syn/14res -t ./output/extraction/pseudo_labeled_syn/yelp2023.json -g ./output/generation/model/b=generator -a ./output/alignment_model/model/b=alignment_model -f ./output/fluency_model/model/b=fluency_model -b ppo
-bash/data_synthesis.sh -c 0 -b 14res_100k -g ./output/generation_ppo/model/b=ppo -e ./output/extraction/model/model/dataset=origin/14res,b=extractor,seed=42 -a ./output/alignment_model/model/b=alignment_model -f ./output/fluency_model/model/b=fluency_model -n 100000 -d data/origin_syn/14res -r output/extraction/pseudo_labeled/yelp2023.json
-python data_filtering.py --origin_data_dir data/origin/14res --augmented_data_dir ./output/augmentation/14res_100k_42.json --output_dir ./output/augmentation_filtered/14res_5k_42 --k 5000
+bash/data_synthesis.sh -c 0 -b 14res_100k -g ./output/generation_ppo/model/b=ppo -e ./output/extraction/model/dataset=origin/14res,b=extractor,seed=42 -a ./output/alignment_model/model/b=alignment_model -f ./output/fluency_model/model/b=fluency_model -n 100000 -d data/origin_syn/14res -r output/extraction/pseudo_labeled/yelp2023.json
+python data_filtering.py --origin_data_dir data/origin/14res --augmented_data_dir ./output/augmentation/14res_100k_42.json/augmented_train.json --output_dir ./output/augmentation_filtered/14res_5k_42 --k 5000
 ```
 注：请事先解压`data/unlabeled`下的文件。
 
