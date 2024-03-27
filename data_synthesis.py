@@ -81,7 +81,7 @@ class DataModule(pl.LightningDataModule):
         ]
 
         self.index_example_by_tao(self.reference_examples)
-        self.augmented_examples = self.make_example(num_example=self.num_augment_example)[:1]
+        self.augmented_examples = self.make_example(num_example=self.num_augment_example)
 
 
         print('-----------data statistic-------------')
