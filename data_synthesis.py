@@ -253,8 +253,8 @@ class LightningModule(pl.LightningModule):
         self.save_hyperparameters(hparams)
         self.data_module = data_module
         
-	if not self.hparams.no_generate:
-	    self.generator = T5ForConditionalGeneration.from_pretrained(self.hparams.generator_path)
+        if not self.hparams.no_generate:
+            self.generator = T5ForConditionalGeneration.from_pretrained(self.hparams.generator_path)
         self.extractor = T5ForConditionalGeneration.from_pretrained(self.hparams.extractor_path)
 
         self.alignment_model = T5ForClassification.from_pretrained(self.hparams.alignment_model_path)
@@ -326,8 +326,8 @@ class LightningModule(pl.LightningModule):
         }
 
     def predict_step(self, batch, batch_idx, dataloader_idx=0):
-	if hasattr(self, 'generator'):
-	    self.generator.eval()
+        if hasattr(self, 'generator'):
+            self.generator.eval()
 
         self.extractor.eval()
         self.alignment_model.eval()
